@@ -105,7 +105,7 @@ export default {
           registrar(){
             this.$store.commit('autenticacaoModule/registrar', this.cadastro);     
             alert(`Usuário cadastrado com sucesso!`);
-            this.$router.push('/login')
+            this.$router.push('/')
           },
           registerOut(){
             this.$router.push('/login')
