@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import Home from './../views/Home.vue';
-import LoginPage from './../views/LoginPage.vue';
-import Register from './../views/Register.vue'
+import Home from '../views/dashboard/Home.vue';
+import Unidade from '../views/dashboard/Unidade.vue';
+import Cadastro from '../views/dashboard/Cadastro.vue'
 
 const routes = [
     {
@@ -18,7 +18,7 @@ const routes = [
     },
     {
         path:'/login',
-        component:LoginPage,
+        component: () => import('../views/LoginPage.vue'),
         beforeEnter: (to)=>{
             const auth = localStorage.getItem('autenticado');
             if(auth){
@@ -29,13 +29,28 @@ const routes = [
     },
     { 
         path: '/registrar',
-        component: Register
+        component: () => import('../views/Register.vue'),
+        beforeEnter: (to)=>{
+            const auth = localStorage.getItem('autenticado');
+            if(auth){
+                return to = '/'
+            }
+            return true
+       }
+    },
+    {
+        path: '/unidade',
+        component: Unidade
+    },
+    {
+        path: '/cadastro',
+        component: Cadastro
     }
 ]
 
 const router = createRouter({
 	routes,
-	history: createWebHashHistory()
+	history: createWebHashHistory(process.env.BASE_URL)
 });
 
 export default router;
