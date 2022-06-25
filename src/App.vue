@@ -20,7 +20,7 @@ export default {
 }
 
 #app {
-  
+  background-color: var(--bs-gray-200);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

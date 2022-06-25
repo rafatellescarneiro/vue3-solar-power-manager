@@ -1,6 +1,6 @@
 <template>
 <div class="dashboard">
-    <h2>Dashboard</h2>
+    <h2 class="navbar navbar-expand-md fixed-top">Dashboard</h2>
     <div class="cards">
       <div class="row">
         <div class="card mb-3 green" style="max-width: 18rem;">
@@ -106,9 +106,10 @@ export default {
   border-right: 3px solid #3bb54a;
 }
  
-h2{
-  text-align: center;
-}
+h2{ 
+        margin: 0 113px;
+        padding: 0 150px;
+    }
 
 h5.consumo{
   margin-left: 45px;

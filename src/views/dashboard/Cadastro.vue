@@ -4,7 +4,7 @@
         <div :style="{ 'margin-left': sidebarWidth }">
             <router-view/>
         </div>
-        <h1>Cadastro</h1>
+        <h2 class="navbar navbar-expand-md fixed-top ">Lançamento de geração mensal</h2>
 
     </div>
 </template>
@@ -23,6 +23,10 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+h2{         
+        margin: 0 113px;
+        padding: 0 150px;
+    }
 
 </style>
