@@ -7,17 +7,13 @@
           <div class="row g-0">
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <div style="width:100%;height:0;padding-bottom:141%;position:relative;">
-                 <iframe src="https://giphy.com/embed/qJgWLdA4AmT1HW6toq" style="position:relative; width:405.875px; height: 573px;" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                </div>
-                  <a href="https://giphy.com/gifs/qJgWLdA4AmT1HW6toq"></a>
+                <img src="../assets/logo.png" alt="" srcset="">
               </div>
             </div>
             <div class="col-lg-6">
               <div class="card-body p-md-5 mx-md-4">
                 <img src="../assets/logo2.png"
                   style="width: 185px;" alt="logo">
-                  <h4 class="mt-1 mb-5 pb-1">DevInHouse</h4>
                   <p>Solar Energy</p>
 
                 <form>
@@ -84,5 +80,13 @@ export default {
 </script>
 
 <style scoped>
+   section{
+      margin-top: 0;
+    }
+    .col-lg-6{
+      background-color: #fafafa;
+      border-radius: 8px;
+    }
+    
     
 </style>
