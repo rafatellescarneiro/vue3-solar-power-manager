@@ -4,10 +4,10 @@
         <span v-if="collapsed">
            
         </span>
-        <span v-else>
-            <img src="../assets/logo2.png"
+        <span class="text-" v-else>
+            <img src="../assets/logoSidebar.png"
                    alt="logo"> 
-            </span>
+        </span>
     </h1>
 
     <SidebarLink to="/" icon="fa fa-chart-pie"> Dashboard </SidebarLink>
@@ -47,6 +47,9 @@ export default {
 </style>
 
 <style scoped>
+a{
+    text-align:left;
+}
 .sidebar{
     color: white;
     background-color: var(--sidebar-bg-color);
@@ -69,7 +72,7 @@ export default {
     position: absolute;
     bottom: 0;
     padding: 0.5em;
-
+    
     color: rgba(255, 255, 255, 0.7);
 
     transition: 0.2s linear;
