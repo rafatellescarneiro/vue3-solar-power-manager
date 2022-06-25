@@ -12,7 +12,7 @@ const autenticacaoModule = {
                 email: '',
                 password: '',
                 confirmar: ''
-            } 
+            }
         }
     },
     mutations: {
@@ -38,6 +38,24 @@ const autenticacaoModule = {
     }
 }   
 
+const cadastroUnidade = {
+    namespaced: true,
+    state(){
+        return{
+            novaUni:{
+               
+            }
+        }
+    },
+    mutations:{
+        salvar(state, novaUni){
+            localStorage.setItem('novaUni', JSON.stringify(novaUni));
+            state.novaUni = {}
+        }
+
+    }
+}
+
 export const collapsed = ref(false)
 export const toggleSidebar = () => (collapsed.value = !collapsed.value)
 
@@ -50,7 +68,8 @@ export const sidebarWidth = computed(
 
 const store = createStore({
     modules: {
-        autenticacaoModule
+        autenticacaoModule,
+        cadastroUnidade
     }
 });
 
