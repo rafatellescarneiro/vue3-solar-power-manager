@@ -6,7 +6,7 @@
         </div>
         <h2 class="navbar navbar-expand-md fixed-top">Nova Unidade</h2>
         <div role="main" class="container">
-                <vee-form @submit="save" :validation-schema="schema" v-slot="{ errors }">
+                <vee-form @submit="salvar" :validation-schema="schema" v-slot="{ errors }">
                     <div class="form-group row">
                         <div class="form-group">
                             <label for="nickname" class="col form-check-inline"><strong>Apelido</strong></label>
@@ -14,8 +14,6 @@
                                 <vee-field name="nickname" class="form-control" v-model="novaUni.nickname" />
                                 <span class="text-danger form-check-inline" v-text="errors.nickname" v-show="errors.nickname"></span>
                            </div>
-                            
-
                         </div>
                         <div class="form-group">
                             <label for="" class="col form-check-inline"><p><strong>Local</strong></p></label>
@@ -45,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <label for="active" class="col form-check-inline"><p><strong>Ativo</strong></p></label>
-                            <input type="checkbox" name="active" > 
+                            <input type="checkbox" name="active" v-model="novaUni.active" > 
                         </div>
                                 
                         <div class="btn">
@@ -61,8 +59,10 @@
 
 <script>
 import { Form, Field, defineRule } from 'vee-validate';
-import Sidebar from '../../components/Sidebar'
-import { sidebarWidth } from '../../router/index' 
+import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
+import Sidebar from '../../components/Sidebar';
+import { ref } from 'vue';
+import { sidebarWidth} from '../../router/index.js';
 
 export default {
     components: {
@@ -88,21 +88,36 @@ export default {
         return{
             schema,
             novaUni: {
-                nickname:'',
-                marca:'',
-                model:'',
-                active: false
+                
             },
             
         }
     },
     methods: {
-        save(){
+        salvar(){
+            this.$store.commit('cadastroUnidade/salvar', this.novaUni)
             this.novaUni = {}
         },
         voltar(){
             this.$router.push('/unidade')
         }
+    },
+    setup(){
+      onBeforeRouteLeave((to, from) => {
+          const answer = window.confirm(
+            'Você realmente deseja sair? Você tem mudanças não salvas!'
+          )
+          
+          if (!answer) return false
+        })
+        const userData = ref()
+        
+      onBeforeRouteUpdate(async (to, from) => {
+          
+          if (to.params.id !== from.params.id) {
+            userData.value = await fetchUser(to.params.id)
+          }
+        })
     }
 }
 </script>
