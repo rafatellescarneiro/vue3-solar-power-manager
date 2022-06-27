@@ -11,23 +11,28 @@
     <div class="card mb-12 form-group row">
           <h5 class="consumo card-text">Lista de unidades</h5>
           <hr>
-          <div class="text-center" v-if="lista.length === 0">
-           <strong>Não há listas cadastradas</strong> 
+          <div class="text-center" v-if="listar.length === 0">
+                    <strong>Não há listas cadastradas</strong> 
           </div>
           <table class="table" v-else>
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Apelido</th>
+                <th>Local</th>
                 <th>Marca</th>
                 <th>Modelo</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="novaUni in lista" :key="novaUni.id">
-                <td>{{ novaUni.nickname }}</td>
-                <td>{{ novaUni.marca }}</td>
-                <td>{{ novaUni.model }}</td>
+              <tr v-for="lista in listar" :key="lista.id">
+                <td><span>{{ lista.id }}</span></td>
+                <td><span>{{ lista.nickname }}</span></td>
+                <td><span>{{ lista.local }}</span></td>
+                <td><span>{{ lista.marca }}</span></td>
+                <td><span>{{ lista.model }}</span></td>
+                <button @click="removeList(n)" class="btn btn-danger">Remover</button>
+                
               </tr>
             </tbody>
           </table>
@@ -40,27 +45,23 @@
 
 
 <script>
-
 import Sidebar from '../../components/Sidebar'
-import { sidebarWidth } from '../../router/index.js' 
+import { sidebarWidth } from '../../router/index.js'
 
 export default {
-  components: { Sidebar },
-  data(){
-    return{
-      lista: [],
-      novaUni: {
-        nickname:'',
-        marca:'',
-        model:''
-      }
-
-    }
+  components: { 
+    Sidebar
+   
   },
   setup(){
     return { 
       sidebarWidth
       }
+     },
+  computed: {
+    listar () {
+      return this.$store.state.cadastroUnidade.lista
+    }
   }
 }
 

@@ -18,10 +18,10 @@
                 class="form-control" 
                 v-model="lancamento.geradora" 
                 placeholder="Selecione a unidade geradora">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
+                  <option v-for="lista in listar" :key="lista.id" value="{ lista.nickname }">
+                  {{ lista.nickname }}
+                  </option>
+                  
                 </vee-field>
                 <span class="text-danger form-check-inline" v-text="errors.geradora" v-show="errors.geradora"></span>
             </div>
@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="btn">
-            <button type="submit" class="btn btn-success" style="margin-right: 5px">Save</button>          </div>
+            <button type="submit" class="btn btn-success" style="margin-right: 5px">Salvar</button>          </div>
         </div>
         </vee-form>
       </div>
@@ -68,15 +68,23 @@ export default {
       date: "required",
       totalGerado: "required"
         } 
-        return{
-          schema,
-          lancamento: {
-            geradora: '',
-            date: '',
-            totalGerado: ''
-          }
+      return{
+        schema,
+        lancamento: {
+          geradora: '',
+          date: '',
+          totalGerado: ''
         }
+      }
 
+  },
+  methods:{
+    save(){
+      this.$store.commit('saveGerador/salvarUni', this.lancamento)
+      alert(`Lançamento gerado com sucesso!`)
+      this.$router.push('/cadastro')
+      this.lancamento={}
+    }
   },
   components: { 
     Sidebar,
@@ -85,6 +93,14 @@ export default {
    },
   setup(){
     return { sidebarWidth }
+  },
+  computed: {
+    listar () {
+      return this.$store.state.cadastroUnidade.lista
+    },
+    salvarUni () {
+      return this.$store.state.saveGerador.salvarUni
+    }
   }
 }
 </script>
