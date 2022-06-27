@@ -6,25 +6,25 @@
         <div class="card mb-3 green" style="max-width: 18rem;">
           <h5 class="card-text">Total unidades</h5>
           <div class="card-body text-dark">
-            <h5 class="card-text"><strong>60</strong></h5>
+            <h5 class="card-text" ><strong>{{ totalUni.length }}</strong></h5>
           </div>
         </div>
         <div class="card mb-3 green" style="max-width: 18rem;">
           <h5 class="card-text">Unidades Ativas</h5>
           <div class="card-body text-dark">
-            <h5 class="card-text"><strong>16</strong></h5>
+            <h5 class="card-text"><strong>{{ uniAtivasCount }}</strong></h5>
           </div>
         </div>
         <div class="card mb-3 green" style="max-width: 18rem;">
           <h5 class="card-text">Unidades Inativas</h5>
           <div class="card-body text-dark">
-            <h5 class="card-text"><strong>30</strong></h5>
+            <h5 class="card-text"><strong>{{ uniInativas }}</strong></h5>
           </div>
         </div>
         <div class="card mb-3 green" style="max-width: 18rem;">
           <h5 class="card-text">Média de energia</h5>
           <div class="card-body text-dark">
-            <h5 class="card-text"><strong>64 kw</strong></h5>
+            <h5 class="card-text"><strong>{{ mediaEnergia }}</strong></h5>
           </div>
         </div>
       </div>
@@ -49,7 +49,24 @@ import { sidebarWidth } from '../../router/index.js'
 export default {
   components: { Sidebar },
   setup(){
-    return { sidebarWidth }
+    return { 
+      sidebarWidth ,
+      unidades:[]
+      }
+  },
+  computed:{
+    totalUni(){
+      return this.$store.state.cadastroUnidade.lista
+    },
+    uniAtivasCount(){
+      return this.$store.state.cadastroUnidade.lista.filter(lista => lista.active).length
+    },
+    uniInativas(){
+      return this.$store.state.cadastroUnidade.lista.filter(lista => !lista.active).length
+    },
+    mediaEnergia(){
+       return this.$store.state.saveGerador.totalGerado
+    }
   }
 }
 </script>

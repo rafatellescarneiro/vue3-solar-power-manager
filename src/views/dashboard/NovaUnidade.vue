@@ -48,7 +48,6 @@
                                 
                         <div class="btn">
                         <button type="submit" class="btn btn-success" style="margin-right: 5px">Save</button>
-                        <button type="button" class="btn btn-warning" @click="voltar">Voltar</button>
                         </div>
                     </div>
                 </vee-form>
@@ -88,7 +87,11 @@ export default {
         return{
             schema,
             novaUni: {
-                
+                nickname:'',
+                local:'',
+                marca:'',
+                model:'',
+                active:false 
             },
             
         }
@@ -96,10 +99,10 @@ export default {
     methods: {
         salvar(){
             this.$store.commit('cadastroUnidade/salvar', this.novaUni)
-            this.novaUni = {}
-        },
-        voltar(){
+            alert(`Unidade cadastrada!`)
+            this.novaUni={} 
             this.$router.push('/unidade')
+
         }
     },
     setup(){

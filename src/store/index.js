@@ -42,18 +42,58 @@ const cadastroUnidade = {
     namespaced: true,
     state(){
         return{
-            novaUni:{
-               
-            }
+            lista:[ ],
+            id:0,
+            unidade:[]
         }
     },
     mutations:{
         salvar(state, novaUni){
-            localStorage.setItem('novaUni', JSON.stringify(novaUni));
-            state.novaUni = {}
-        }
-
+            localStorage.setItem('novaUni', JSON.stringify(novaUni))
+            localStorage.setItem('unidades', JSON.stringify(novaUni.nickname))
+            const lista = JSON.parse(localStorage.getItem('novaUni'))
+            const unidade1 = JSON.parse(localStorage.getItem('unidades'))
+            state.lista.push({
+                id:state.id,
+                nickname:novaUni.nickname,
+                local:novaUni.local,
+                marca:novaUni.marca,
+                model:novaUni.model,
+                active:novaUni.active
+            })
+           
+            state.unidade.push({
+                nickname:novaUni.nickname
+            })
+            console.log(state.lista)
+                state.id++
+            }  
     }
+    
+}
+
+const saveGerador = {
+    namespaced: true,
+    state(){
+        return{
+            unidade:[
+                
+            ],
+            totalGerado: 0
+        }
+    },
+    mutations:{
+        salvarUni(state, lancamento){
+            localStorage.setItem('lancamento', JSON.stringify(lancamento))
+            state.unidade.push({
+                geradora:lancamento.geradora,
+                date:lancamento.date,
+                totalGerado:lancamento.totalGerado
+            })
+            console.log(state.unidade);
+        }
+    }
+    
 }
 
 export const collapsed = ref(false)
@@ -69,7 +109,8 @@ export const sidebarWidth = computed(
 const store = createStore({
     modules: {
         autenticacaoModule,
-        cadastroUnidade
+        cadastroUnidade,
+        saveGerador
     }
 });
 
